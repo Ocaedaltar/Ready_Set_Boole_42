@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 14:51:08 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 17:04:13 by mlormois         ###   ########.fr       */
+/*   Created: 2022/02/25 17:01:50 by mlormois          #+#    #+#             */
+/*   Updated: 2022/02/25 17:33:40 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "adder.hpp"
+#include "multiplier.hpp"
 
 void test( unsigned int a , unsigned int b)
 {
-	std::cout << a << " + " << b << " = " << adder(a, b) << std::endl;
+	std::cout << a << " x " << b << " = " << multiplier(a, b) << std::endl;
 }
 
 int main( void )
 {
-	test(20, 900);
-	test(0, 5);
-	test(99999, 1);
-	test(163, 6);
+	test(9, 10);
+	test(5, 2);
+	test(42, 0);
+	test(1, 1000);
+	test(13, 238);
 	return 0;
 }

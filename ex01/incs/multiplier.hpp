@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   multiplier.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 14:51:08 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 17:04:13 by mlormois         ###   ########.fr       */
+/*   Created: 2022/02/25 17:08:36 by mlormois          #+#    #+#             */
+/*   Updated: 2022/02/25 17:10:32 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "adder.hpp"
+#ifndef MULTIPLIER_HPP
+# define MULTIPLIER_HPP
 
-void test( unsigned int a , unsigned int b)
-{
-	std::cout << a << " + " << b << " = " << adder(a, b) << std::endl;
-}
+# include <string>
+# include <iostream>
 
-int main( void )
-{
-	test(20, 900);
-	test(0, 5);
-	test(99999, 1);
-	test(163, 6);
-	return 0;
-}
+unsigned int adder( unsigned int a, unsigned int b);
+unsigned int multiplier( unsigned int a, unsigned int b );
+
+#endif

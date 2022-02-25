@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   multiplier.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 14:51:08 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 17:04:13 by mlormois         ###   ########.fr       */
+/*   Created: 2022/02/25 17:10:00 by mlormois          #+#    #+#             */
+/*   Updated: 2022/02/25 18:00:20 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "adder.hpp"
+#include "multiplier.hpp"
 
-void test( unsigned int a , unsigned int b)
+// RECURSIVE
+unsigned int adder( unsigned int a, unsigned int b)
 {
-	std::cout << a << " + " << b << " = " << adder(a, b) << std::endl;
+	if (!a)
+		return b;
+	return adder((a & b) << 1, a ^ b);
 }
 
-int main( void )
+unsigned int multiplier( unsigned int a, unsigned int b )
 {
-	test(20, 900);
-	test(0, 5);
-	test(99999, 1);
-	test(163, 6);
+	if (b == 1)
+		return a;
+	else if (b > 1)
+		return ( adder(a, multiplier( a, b - 1 )) );
 	return 0;
 }
