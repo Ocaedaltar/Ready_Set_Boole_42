@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 15:13:19 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:40:21 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,8 +188,7 @@ namespace ft
 		}
 		return res.top();
 	}
-
+	
 	void Ast::printTable( void )
 	{}
-
 }

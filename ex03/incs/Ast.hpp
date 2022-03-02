@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:28:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 10:43:40 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:54:41 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ namespace ft
 	public:
 		Ast( std::string const & formula );
 		virtual ~Ast( void );
-
 
 		iterator begin( void );
 		iterator end( void );

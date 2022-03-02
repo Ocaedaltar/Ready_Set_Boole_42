@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:58:22 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 12:53:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:58:35 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string>
 # include <iostream>
+# include <cmath>
 
 namespace ft
 {

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 04:33:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 15:23:56 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:56:15 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ bool eval_formula( std::string const & str )
 	ft::Ast tree( str );
 	return tree.result();
 }
+
+// Pourquoi un AST complet. 
+//  Seulement pour le fun, je pourais faire seulement un stack et faire le developpement directement
+//  Mais c'est simpa de faire son petit Ast tranquillou! 
 
 int main( void )
 {
