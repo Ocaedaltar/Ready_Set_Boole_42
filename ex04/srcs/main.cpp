@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:27:56 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 19:06:56 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/03 22:44:58 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ bool eval_formula( std::string const & formula )
 	{
 		if ( formula[i] == '0' || formula[i] == '1' )
 			res.push( formula[i] == '1' ? true : false );
+		else if ( formula[i] == '!')
+		{
+			a = res.top(); res.pop();
+			res.push( a == true ? false : true );
+		}
 		else
 		{
 			b = res.top(); res.pop();
@@ -94,5 +99,6 @@ void print_truth_table( std::string const & str)
 
 int main( void )
 {
-	print_truth_table( "AB&C|" );
+	// print_truth_table( "A!!B|!" );
+	print_truth_table( "AB&C|DA&A|&" );
 }

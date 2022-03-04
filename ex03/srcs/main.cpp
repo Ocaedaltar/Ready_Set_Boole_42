@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 04:33:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 15:56:15 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/03 17:09:13 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ int main( void )
 
 	// More Test Than Subject:
 	PRINT_BOOL( eval_formula( "01&11&|") );
+	PRINT_BOOL( eval_formula( "0111^=|") );
 }
