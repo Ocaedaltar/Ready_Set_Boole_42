@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:28:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/04 04:37:40 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:01:40 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ namespace ft
 		nodePTR						NIL;
 		allocator_type				_alloc;
 
-
 		//////////////////////////
 		//	   Constructors:	//
 		//////////////////////////
@@ -103,7 +102,6 @@ namespace ft
 
 		nodePTR getNode( void ) const;
 
-
 		//////////////////////////
 		//	    Observers:		//
 		//////////////////////////
@@ -118,10 +116,10 @@ namespace ft
 	private:
 		void rewrite_egal( nodePTR node );
 		void rewrite_xor( nodePTR node );
-		void rewrite_or( nodePTR node );
-		void rewrite_and( nodePTR node );
 		void rewrite_mc( nodePTR node );
 
+		void 	_equivalence( nodePTR node );
+		void 	_deMorganLaw( nodePTR node );
 		nodePTR _copieNodes( nodePTR const & node );
 
 		//////////////////////////

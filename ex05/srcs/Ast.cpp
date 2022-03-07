@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/04 04:40:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:01:20 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,35 +194,45 @@ namespace ft
 		return res.top();
 	}
 
+	void Ast::_deMorganLaw( nodePTR node )
+	{
+		node->value = ( node->type == OR ? '&' : '|' );
+		node->type = ( node->type == OR ? AND : OR );
+		node->left->setNeg();
+		node->right->setNeg();
+		node->setNeg();
+	}
+
+	void Ast::_equivalence( nodePTR node )
+	{
+		switch ( node->type )
+		{
+		case EGAL:
+			rewrite_egal( node );
+			break;
+		case XOR:
+			rewrite_xor( node );
+			break;
+		case MC:
+			rewrite_mc( node );
+			break;
+		default:
+			break;
+		}
+	}
+
 	void Ast::negation_form( nodePTR node )
 	{
 		if ( node->type != BOOL)
 		{
+			if ( node->type > 2)
+				_equivalence( node );
 			if (node->neg)
-			{
-				switch (node->type)
-				{
-				case AND:
-					rewrite_and( node );
-					break;
-				case OR:
-					rewrite_or( node );
-					break;
-				case XOR:
-					rewrite_xor( node );
-					break;
-				case MC:
-					rewrite_mc( node );
-					break;
-				case EGAL:
-					rewrite_egal( node );
-					break;
-				default:
-					break;
-				}	
-			}
-			negation_form( node->left );
-			negation_form( node->right );
+				_deMorganLaw( node );
+			if ( node->left )
+				negation_form( node->left );
+			if ( node->right )
+				negation_form( node->right );
 		}
 		
 	}
@@ -248,33 +258,27 @@ namespace ft
 	
 	void Ast::rewrite_xor( nodePTR node )
 	{
-
-	}
-	
-	void Ast::rewrite_or( nodePTR node )
-	{
-		node->setNeg();
-		node->value = '&';
-		node->left->setNeg();
-		node->right->setNeg();
-	}
-	
-	void Ast::rewrite_and( nodePTR node )
-	{
-		node->setNeg();
-		node->value = '|';
-		node->left->setNeg();
-		node->right->setNeg();
+		
 	}
 	
 	void Ast::rewrite_mc( nodePTR node )
 	{
-		
+
 	}
 	
-	nodePTR _copieNodes( nodePTR const & node )
+	nodePTR Ast::_copieNodes( nodePTR const & node )
 	{
-		
+		nodePTR elem = _node_create(node->value, node->type);
+		if ( node->left )
+		{
+			elem->left = _copieNodes( node->left );
+			elem->left->parent = elem;
+		}
+		if ( node->right )
+		{
+			elem->right = _copieNodes( node->right );
+			elem->right->parent = elem;
+		}
+		return elem;
 	}
-
 }
