@@ -111,9 +111,11 @@ namespace ft
 		//////////////////////////
 
 	public:
-		void negation_form( nodePTR node );
+		void negation_form( void );
 
 	private:
+		void _fnn( nodePTR node );
+
 		void rewrite_egal( nodePTR node );
 		void rewrite_xor( nodePTR node );
 		void rewrite_mc( nodePTR node );

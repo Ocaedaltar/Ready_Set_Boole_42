@@ -221,7 +221,12 @@ namespace ft
 		}
 	}
 
-	void Ast::negation_form( nodePTR node )
+	void Ast::negation_form( void )
+	{
+		_fnn( _root );
+	}
+
+	void Ast::_fnn( nodePTR node )
 	{
 		if ( node->type != BOOL)
 		{
@@ -230,40 +235,78 @@ namespace ft
 			if (node->neg)
 				_deMorganLaw( node );
 			if ( node->left )
-				negation_form( node->left );
+				_fnn( node->left );
 			if ( node->right )
-				negation_form( node->right );
+				_fnn( node->right );
 		}
-		
-	}
-
-	std::string Ast::to_string( void )
-	{
-		std::string dst;
-		for ( iterator it = begin(); it != end(); it++)
-		{
-			// std::cout << it->value;
-			dst.push_back( it->value );
-			if ( it->neg )
-				dst.push_back('!');
-		}
-		// std::cout << std::endl;
-		return dst;
 	}
 
 	void Ast::rewrite_egal( nodePTR node )
 	{
-		
+		nodePTR tmp_left;
+		nodePTR tmp_right;
+
+		// CHANGE ORIGIN
+		node->value = '&';
+		node->type = AND;
+
+		// CREATE LEFT
+		tmp_left = _node_create( '>', MC );
+		tmp_left->left = _copieNodes(node->left);
+		tmp_left->right = _copieNodes(node->right);
+
+		// CREATE RIGHT
+		tmp_right = _node_create( '>', MC);
+		tmp_right->left = _copieNodes(node->left);
+		tmp_right->right = _copieNodes(node->right);
+
+		// DELETE OLD
+		_clear(node->left);
+		_clear(node->right);
+
+		// LINK
+		node->left = tmp_left;
+		tmp_left->parent = node;
+		node->right = tmp_right;
+		tmp_right->parent = node;
 	}
 	
 	void Ast::rewrite_xor( nodePTR node )
 	{
-		
+		nodePTR tmp_left;
+		nodePTR tmp_right;
+
+		// CHANGE ORIGIN
+		node->value = '&';
+		node->type = AND;
+
+		// CREATE LEFT
+		tmp_left = _node_create( '&', AND );
+		tmp_left->setNeg();
+		tmp_left->left = _copieNodes(node->left);
+		tmp_left->right = _copieNodes(node->right);
+
+		// CREATE RIGHT
+		tmp_right = _node_create( '|', OR);
+		tmp_right->left = _copieNodes(node->left);
+		tmp_right->right = _copieNodes(node->right);
+
+		// DELETE OLD
+		_clear(node->left);
+		_clear(node->right);
+
+		// LINK
+		node->left = tmp_left;
+		tmp_left->parent = node;
+		node->right = tmp_right;
+		tmp_right->parent = node;
 	}
 	
 	void Ast::rewrite_mc( nodePTR node )
 	{
-
+		node->value = '|';
+		node->type = OR;
+		node->left->setNeg();
 	}
 	
 	nodePTR Ast::_copieNodes( nodePTR const & node )
@@ -281,4 +324,17 @@ namespace ft
 		}
 		return elem;
 	}
+
+	std::string Ast::to_string( void )
+	{
+		std::string dst;
+		for ( iterator it = begin(); it != end(); it++)
+		{
+			dst.push_back( it->value );
+			if ( it->neg )
+				dst.push_back('!');
+		}
+		return dst;
+	}
+
 }

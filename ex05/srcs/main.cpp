@@ -27,8 +27,10 @@ int main( void )
 {
 	try
 	{
-		std::cout << negation_normal_form( "AB&!" ) << std::endl;
-		std::cout << negation_normal_form( "AB|!" ) << std::endl;
+		std::cout << "AB&!  :  " << negation_normal_form( "AB&!" ) << std::endl;
+		std::cout << "AB|!  :  " << negation_normal_form( "AB|!" ) << std::endl;
+		std::cout << "AB^  :  " << negation_normal_form( "AB^" ) << std::endl;
+		std::cout << "AB^!  :  " << negation_normal_form( "AB^!" ) << std::endl;
 		// std::cout << negation_normal_form( "AB>" ) << std::endl;
 		// std::cout << negation_normal_form( "AB=" ) << std::endl;
 		// std::cout << negation_normal_form( "AB|C&!" ) << std::endl;
