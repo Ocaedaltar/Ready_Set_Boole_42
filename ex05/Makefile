@@ -10,7 +10,7 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.cpp=%.o))
 
 CC		=	clang++
 
-FLAGS	=	-Wall -Werror -Wextra
+FLAGS	=	-Wall -Werror -Wextra -g3
 
 .PHONY : all
 all:	$(NAME)

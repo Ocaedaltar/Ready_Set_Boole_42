@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/07 16:01:20 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/08 20:27:12 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ namespace ft
 			return 0;
 		else if ( val >= 'A' && val <= 'Z' )
 		{
-			// std::map< char, bool>::iterator it = _vars.find( val );
-			// if (it == _vars.end())
 			_vars.insert( std::pair<char, bool>( val, true));
 			return 0;
 		}
@@ -72,8 +70,6 @@ namespace ft
 		for ( size_t i = 0; i < formula.size(); i++)
 		{
 			value = formula[i];
-			// std::cout << formula[i] << std::endl;
-
 			if ( !_isVariable( value ) )
 			{
 				save.push( _node_create( value, 0) );
@@ -141,21 +137,8 @@ namespace ft
 		_alloc.deallocate(node, 1);
 	}
 
-
-	// nodePTR Ast::getNode( void ) const
-	// {
-	// 	return _node;
-	// }
-
 	bool Ast::result( void )
 	{
-		// std::cout << " PRINT RES: " << std::endl;
-		// for ( iterator it = begin(); it != end(); it++)
-		// {
-		// 	std::cout << it->value << " ";
-		// }
-		// std::cout << std::endl;
-
 		bool a;
 		bool b;
 
@@ -234,9 +217,9 @@ namespace ft
 				_equivalence( node );
 			if (node->neg)
 				_deMorganLaw( node );
-			if ( node->left )
+			if ( node->left != NIL )
 				_fnn( node->left );
-			if ( node->right )
+			if ( node->right != NIL )
 				_fnn( node->right );
 		}
 	}
@@ -247,23 +230,25 @@ namespace ft
 		nodePTR tmp_right;
 
 		// CHANGE ORIGIN
-		node->value = '&';
-		node->type = AND;
-
+		node->value = '|';
+		node->type = OR;
 		// CREATE LEFT
-		tmp_left = _node_create( '>', MC );
+		tmp_left = _node_create( '&', AND );
 		tmp_left->left = _copieNodes(node->left);
+		tmp_left->left->parent = tmp_left;
 		tmp_left->right = _copieNodes(node->right);
-
+		tmp_left->right->parent = tmp_left;
 		// CREATE RIGHT
-		tmp_right = _node_create( '>', MC);
+		tmp_right = _node_create( '&', AND);
 		tmp_right->left = _copieNodes(node->left);
+		tmp_right->left->parent = tmp_right;
+		tmp_right->left->setNeg();
 		tmp_right->right = _copieNodes(node->right);
-
+		tmp_right->right->parent = tmp_right;
+		tmp_right->right->setNeg();
 		// DELETE OLD
 		_clear(node->left);
 		_clear(node->right);
-
 		// LINK
 		node->left = tmp_left;
 		tmp_left->parent = node;
@@ -273,28 +258,25 @@ namespace ft
 	
 	void Ast::rewrite_xor( nodePTR node )
 	{
-		nodePTR tmp_left;
-		nodePTR tmp_right;
-
+		nodePTR tmp_left = _node_create( '&', AND );
+		nodePTR tmp_right = _node_create( '|', OR);
 		// CHANGE ORIGIN
 		node->value = '&';
 		node->type = AND;
-
 		// CREATE LEFT
-		tmp_left = _node_create( '&', AND );
 		tmp_left->setNeg();
 		tmp_left->left = _copieNodes(node->left);
+		tmp_left->left->parent = tmp_left;
 		tmp_left->right = _copieNodes(node->right);
-
+		tmp_left->right->parent = tmp_left;
 		// CREATE RIGHT
-		tmp_right = _node_create( '|', OR);
 		tmp_right->left = _copieNodes(node->left);
+		tmp_right->left->parent = tmp_right;
 		tmp_right->right = _copieNodes(node->right);
-
+		tmp_right->right->parent = tmp_right;
 		// DELETE OLD
 		_clear(node->left);
 		_clear(node->right);
-
 		// LINK
 		node->left = tmp_left;
 		tmp_left->parent = node;
@@ -309,15 +291,15 @@ namespace ft
 		node->left->setNeg();
 	}
 	
-	nodePTR Ast::_copieNodes( nodePTR const & node )
+	nodePTR Ast::_copieNodes( nodePTR node )
 	{
 		nodePTR elem = _node_create(node->value, node->type);
-		if ( node->left )
+		if ( node->left != NIL )
 		{
 			elem->left = _copieNodes( node->left );
 			elem->left->parent = elem;
 		}
-		if ( node->right )
+		if ( node->right != NIL )
 		{
 			elem->right = _copieNodes( node->right );
 			elem->right->parent = elem;
@@ -335,6 +317,28 @@ namespace ft
 				dst.push_back('!');
 		}
 		return dst;
+	}
+
+	// Affichage d'arbres syntaxique:
+	void    Ast::print(void)
+	{
+		std::stringstream    buffer;
+
+		if (this->_root != this->NIL)
+		{
+			this->_print(this->_root, buffer, true, "");
+			std::cout << buffer.str();
+		}
+	}
+
+	void    Ast::_print(nodePTR node, std::stringstream &buffer, bool isTail, std::string prefix)
+	{
+		if (node->right != this->NIL)
+			this->_print(node->right, buffer, false, std::string(prefix).append(isTail ? "│   " : "    "));
+		buffer << prefix << (isTail ? "└── " : "┌── ");
+		buffer << node->value << (node->neg ? "!" : "") << std::endl;
+		if (node->left != this->NIL)
+			this->_print(node->left, buffer, true, std::string(prefix).append(isTail ? "    " : "│   "));
 	}
 
 }

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:28:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/07 16:01:40 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/08 20:24:39 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 # include <map>
 # include <iterator>
 # include <iostream>
+# include <sstream>
 # include <stack>
 # include "Ast_utils.hpp"
 
 # define M_BOOL "01&|^>=!"
 # define M_VARS "ABCDEFGHIJKLMNOPQRSTUVWXYZ&|^>=!"
 
+// Parsing:
 void is_rpn( std::string const & formula );
 
 namespace ft
@@ -106,23 +108,29 @@ namespace ft
 		//	    Observers:		//
 		//////////////////////////
 
+	public:
+		void	print(void);
+
+	private:
+		void	_print(nodePTR node, std::stringstream &buffer, bool isTail, std::string prefix);
+
 		//////////////////////////
 		//	    Modifiers:		//
 		//////////////////////////
 
 	public:
-		void negation_form( void );
+		void 	negation_form( void );
 
 	private:
-		void _fnn( nodePTR node );
-
-		void rewrite_egal( nodePTR node );
-		void rewrite_xor( nodePTR node );
-		void rewrite_mc( nodePTR node );
-
+		void 	_fnn( nodePTR node );
 		void 	_equivalence( nodePTR node );
 		void 	_deMorganLaw( nodePTR node );
-		nodePTR _copieNodes( nodePTR const & node );
+
+		void 	rewrite_egal( nodePTR node );
+		void 	rewrite_xor( nodePTR node );
+		void 	rewrite_mc( nodePTR node );
+
+		nodePTR _copieNodes( nodePTR node );
 
 		//////////////////////////
 		//	    Operations:		//
