@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 23:53:57 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 20:43:18 by mlormois         ###   ########.fr       */
+/*   Created: 2022/03/08 20:41:17 by mlormois          #+#    #+#             */
+/*   Updated: 2022/03/08 20:59:14 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ namespace ft
 	Ast_node::Ast_node( void ) :
 		value(0), type(0), neg(false), parent(NULL), right(NULL), left(NULL)
 	{
-		// std::cout << "AST NODE default constructor" << std::endl;
 	}
 
 	Ast_node::Ast_node( Value value, Type type, nodePTR NIL) :
 		value(value), type(type), neg(false), parent(NIL), right(NIL), left(NIL)
 	{
-		// std::cout << "AST NODE value constructor" << std::endl;
 	}
 
 	Ast_node::Ast_node( Ast_node const & cpy )
@@ -43,7 +41,6 @@ namespace ft
 	Ast_node::~Ast_node( void )
 	{}
 
-	// ATTENTION DEEPCOPIE PAS FAITE
 	Ast_node & Ast_node::operator=( Ast_node const & cpy )
 	{
 		value = cpy.value;

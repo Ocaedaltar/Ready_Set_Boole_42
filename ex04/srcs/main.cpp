@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:27:56 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/03 22:44:58 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/14 14:45:02 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,16 @@ std::map<char, bool> ft_createMap( std::string const & str )
 
 void print_header( std::map<char, bool> map )
 {
+	int i =0;
 	for (std::map<char, bool>::iterator it = map.begin(); it != map.end(); it++ )
+	{
+		i++;
 		std::cout << "| " << it->first << " ";
-	std::cout << "| = |"<< std::endl << "|---|---|---|---|" << std::endl;
+	}
+	std::cout << "| = |"<< std::endl;
+	for ( int j= 0; j < i+1; j++)
+	 	std::cout << "|---";
+	std::cout << "|" << std::endl;
 }
 
 void print_resultat( std::map<char, bool> map, std::string const & formula )
@@ -99,6 +106,6 @@ void print_truth_table( std::string const & str)
 
 int main( void )
 {
-	// print_truth_table( "A!!B|!" );
-	print_truth_table( "AB&C|DA&A|&" );
+	print_truth_table( "A!!B|!" );
+	// print_truth_table( "AB&C|DA&A|&" );
 }

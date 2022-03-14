@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 14:35:10 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 01:17:02 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:31:50 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ std::string negation_normal_form( std::string const & formula )
 	// Transformation en Ast
 	ft::Ast tree( formula );
 	tree.negation_form();
+	tree.print();
 	// Return de la string grace a l'arbre de substiue en NNF
 	return ( tree.to_string() );
 }
@@ -29,23 +30,24 @@ int main( void )
 	try
 	{
 		// SIMPLE
-		std::cout << "AB&!  :  " << negation_normal_form( "AB&!" ) << std::endl; // !(A & B) --> !A | !B
-		std::cout << "AB|!  :  " << negation_normal_form( "AB|!" ) << std::endl;
+		std::cout << "AB&C&D&   :  \n" << negation_normal_form( "AB&C&D&" ) << std::endl;
+		// std::cout << "AB&!  :  " << negation_normal_form( "AB&!" ) << std::endl; // !(A & B) --> !A | !B
+		// std::cout << "AB|!  :  " << negation_normal_form( "AB|!" ) << std::endl;
 		
-		// MC
-		std::cout << "AB>   :  " << negation_normal_form( "AB>" ) << std::endl;
-		std::cout << "AB>!  :  " << negation_normal_form( "AB>!" ) << std::endl;
+		// // MC
+		// std::cout << "AB>   :  " << negation_normal_form( "AB>" ) << std::endl;
+		// std::cout << "AB>!  :  " << negation_normal_form( "AB>!" ) << std::endl;
 
-		// XOR
-		std::cout << "AB^   :  " << negation_normal_form( "AB^" ) << std::endl;
-		std::cout << "AB^!  :  " << negation_normal_form( "AB^!" ) << std::endl;
+		// // XOR
+		// std::cout << "AB^   :  " << negation_normal_form( "AB^" ) << std::endl;
+		// std::cout << "AB^!  :  " << negation_normal_form( "AB^!" ) << std::endl;
 
-		// EGAL
-		std::cout << "AB=   :  " << negation_normal_form( "AB=" ) << std::endl;
-		std::cout << "AB=!  :  " << negation_normal_form( "AB=!" ) << std::endl;
+		// // EGAL
+		// std::cout << "AB=   :  " << negation_normal_form( "AB=" ) << std::endl;
+		// std::cout << "AB=!  :  " << negation_normal_form( "AB=!" ) << std::endl;
 
-		// EGAL
-		std::cout << "AB|C&!:  " << negation_normal_form( "AB|C&!" ) << std::endl;
+		// // EGAL
+		// std::cout << "AB|C&!:  " << negation_normal_form( "AB|C&!" ) << std::endl;
 		// std::cout << "AB|C&!:  " << negation_normal_form( "AB|C&!" ) << std::endl;
 	}
 	catch(const std::invalid_argument& ia)

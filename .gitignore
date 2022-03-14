@@ -1,0 +1,13 @@
+objs/
+.vscode/
+
+# Exo Exec
+
+Adder
+Multiplier
+GrayCode
+Bool_Evaluation
+Truth_table
+NegationForm
+ConjonctiveForm
+
