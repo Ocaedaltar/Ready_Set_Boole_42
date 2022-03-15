@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 14:35:10 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 21:31:50 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/14 18:14:05 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main( void )
 	try
 	{
 		// SIMPLE
-		std::cout << "AB&C&D&   :  \n" << negation_normal_form( "AB&C&D&" ) << std::endl;
+		// std::cout << "AB&C&D&   :  \n" << negation_normal_form( "AB&C&D&" ) << std::endl;
 		// std::cout << "AB&!  :  " << negation_normal_form( "AB&!" ) << std::endl; // !(A & B) --> !A | !B
 		// std::cout << "AB|!  :  " << negation_normal_form( "AB|!" ) << std::endl;
 		
@@ -39,8 +39,8 @@ int main( void )
 		// std::cout << "AB>!  :  " << negation_normal_form( "AB>!" ) << std::endl;
 
 		// // XOR
-		// std::cout << "AB^   :  " << negation_normal_form( "AB^" ) << std::endl;
-		// std::cout << "AB^!  :  " << negation_normal_form( "AB^!" ) << std::endl;
+		// std::cout << "AB^   :  " << std::endl << negation_normal_form( "AB^" ) << std::endl;
+		// std::cout << "AB^!  :  " << std::endl << negation_normal_form( "AB^!" ) << std::endl;
 
 		// // EGAL
 		// std::cout << "AB=   :  " << negation_normal_form( "AB=" ) << std::endl;

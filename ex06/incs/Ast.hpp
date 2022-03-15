@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:30:00 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 21:26:04 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/15 02:03:39 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 # define M_BOOL "01&|^>=!"
 # define M_VARS "ABCDEFGHIJKLMNOPQRSTUVWXYZ&|^>=!"
+
+# define RIGHT 1
+# define LEFT 2
 
 typedef ft::Ast_node*					nodePTR;
 typedef typename ft::Ast_iterator		iterator;
@@ -106,6 +109,8 @@ namespace ft
 		nodePTR _copieNodes( nodePTR node );
 
 		void 	_fcn( nodePTR node );
+		void	_conjonctive( nodePTR node );
+		// void	_repartition( nodePTR node );
 
 		//////////////////////////
 		//	    Operations:		//
