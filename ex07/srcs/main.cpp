@@ -6,11 +6,11 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:29:26 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/16 14:27:45 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/16 14:59:08 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Conjonctive.hpp"
+#include "Satisfaction.hpp"
 
 bool sat( std::string const & formula )
 {
