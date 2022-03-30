@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:34:35 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 20:40:23 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:23:46 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,22 @@ namespace ft
 		nodePTR tmp_right;
 
 		// CHANGE ORIGIN
-		node->value = '|';
-		node->type = OR;
+		node->value = '&';
+		node->type = AND;
 		// CREATE LEFT
-		tmp_left = _node_create( '&', AND );
+		tmp_left = _node_create( '|', OR );
 		tmp_left->left = _copieNodes(node->left);
 		tmp_left->left->parent = tmp_left;
 		tmp_left->right = _copieNodes(node->right);
 		tmp_left->right->parent = tmp_left;
+		tmp_left->right->setNeg();
 		// CREATE RIGHT
-		tmp_right = _node_create( '&', AND);
+		tmp_right = _node_create( '|', OR);
 		tmp_right->left = _copieNodes(node->left);
 		tmp_right->left->parent = tmp_right;
 		tmp_right->left->setNeg();
 		tmp_right->right = _copieNodes(node->right);
 		tmp_right->right->parent = tmp_right;
-		tmp_right->right->setNeg();
 		// DELETE OLD
 		_clear(node->left);
 		_clear(node->right);

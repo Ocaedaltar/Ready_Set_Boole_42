@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 14:24:06 by mlormois         ###   ########.fr       */
+/*   Created: 2022/03/08 20:30:17 by mlormois          #+#    #+#             */
+/*   Updated: 2022/03/08 20:56:37 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 namespace ft
 {
-	typedef Ast_node*					nodePTR;
-	typedef typename ft::Ast_iterator	iterator;
-	typedef std::allocator<Ast_node>    allocator_type;
-	typedef std::stack< nodePTR >		Stack;
-
 	Ast::Ast( void )
 	{}
 
@@ -37,24 +32,6 @@ namespace ft
 		nodePTR elem = _alloc.allocate(1);
 		_alloc.construct(elem, value, type, NIL);
 		return elem;
-	}
-
-	bool Ast::_isVariable( char val )
-	{
-		if ( val == '0' || val == '1' )
-			return 0;
-		else if ( val >= 'A' && val <= 'Z' )
-		{
-			_vars.insert( std::pair<char, bool>( val, true));
-			return 0;
-		}
-		return 1;	
-	}
-
-	int  Ast::_takeType( char val )
-	{
-		return ( AND * ( val == '&') + OR * ( val == '|') + XOR * ( val == '^') 
-				+ MC * ( val == '>' ) + EGAL * ( val == '=' ));
 	}
 
 	Ast::Ast( std::string const & formula )
@@ -177,120 +154,6 @@ namespace ft
 		return res.top();
 	}
 
-	void Ast::_deMorganLaw( nodePTR node )
-	{
-		node->value = ( node->type == OR ? '&' : '|' );
-		node->type = ( node->type == OR ? AND : OR );
-		node->left->setNeg();
-		node->right->setNeg();
-		node->setNeg();
-	}
-
-	void Ast::_equivalence( nodePTR node )
-	{
-		switch ( node->type )
-		{
-		case EGAL:
-			rewrite_egal( node );
-			break;
-		case XOR:
-			rewrite_xor( node );
-			break;
-		case MC:
-			rewrite_mc( node );
-			break;
-		default:
-			break;
-		}
-	}
-
-	void Ast::negation_form( void )
-	{
-		_fnn( _root );
-	}
-
-	void Ast::_fnn( nodePTR node )
-	{
-		if ( node->type != BOOL)
-		{
-			if ( node->type > 2)
-				_equivalence( node );
-			if (node->neg)
-				_deMorganLaw( node );
-			if ( node->left != NIL )
-				_fnn( node->left );
-			if ( node->right != NIL )
-				_fnn( node->right );
-		}
-	}
-
-	void Ast::rewrite_egal( nodePTR node )
-	{
-		nodePTR tmp_left;
-		nodePTR tmp_right;
-
-		// CHANGE ORIGIN
-		node->value = '&';
-		node->type = AND;
-		// CREATE LEFT
-		tmp_left = _node_create( '|', OR );
-		tmp_left->left = _copieNodes(node->left);
-		tmp_left->left->parent = tmp_left;
-		tmp_left->right = _copieNodes(node->right);
-		tmp_left->right->parent = tmp_left;
-		tmp_left->right->setNeg();
-		// CREATE RIGHT
-		tmp_right = _node_create( '|', OR);
-		tmp_right->left = _copieNodes(node->left);
-		tmp_right->left->parent = tmp_right;
-		tmp_right->left->setNeg();
-		tmp_right->right = _copieNodes(node->right);
-		tmp_right->right->parent = tmp_right;
-		// DELETE OLD
-		_clear(node->left);
-		_clear(node->right);
-		// LINK
-		node->left = tmp_left;
-		tmp_left->parent = node;
-		node->right = tmp_right;
-		tmp_right->parent = node;
-	}
-	
-	void Ast::rewrite_xor( nodePTR node )
-	{
-		nodePTR tmp_left = _node_create( '&', AND );
-		nodePTR tmp_right = _node_create( '|', OR);
-		// CHANGE ORIGIN
-		node->value = '&';
-		node->type = AND;
-		// CREATE LEFT
-		tmp_left->setNeg();
-		tmp_left->left = _copieNodes(node->left);
-		tmp_left->left->parent = tmp_left;
-		tmp_left->right = _copieNodes(node->right);
-		tmp_left->right->parent = tmp_left;
-		// CREATE RIGHT
-		tmp_right->left = _copieNodes(node->left);
-		tmp_right->left->parent = tmp_right;
-		tmp_right->right = _copieNodes(node->right);
-		tmp_right->right->parent = tmp_right;
-		// DELETE OLD
-		_clear(node->left);
-		_clear(node->right);
-		// LINK
-		node->left = tmp_left;
-		tmp_left->parent = node;
-		node->right = tmp_right;
-		tmp_right->parent = node;
-	}
-	
-	void Ast::rewrite_mc( nodePTR node )
-	{
-		node->value = '|';
-		node->type = OR;
-		node->left->setNeg();
-	}
-	
 	nodePTR Ast::_copieNodes( nodePTR node )
 	{
 		nodePTR elem = _node_create(node->value, node->type);
@@ -341,4 +204,21 @@ namespace ft
 			this->_print(node->left, buffer, true, std::string(prefix).append(isTail ? "    " : "│   "));
 	}
 
+	bool Ast::_isVariable( char val )
+	{
+		if ( val == '0' || val == '1' )
+			return 0;
+		else if ( val >= 'A' && val <= 'Z' )
+		{
+			_vars.insert( std::pair<char, bool>( val, true));
+			return 0;
+		}
+		return 1;	
+	}
+
+	int  Ast::_takeType( char val )
+	{
+		return ( AND * ( val == '&') + OR * ( val == '|') + XOR * ( val == '^') 
+				+ MC * ( val == '>' ) + EGAL * ( val == '=' ));
+	}
 }
