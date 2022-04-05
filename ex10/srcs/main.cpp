@@ -5,63 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/31 20:12:16 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/31 21:33:23 by mlormois         ###   ########.fr       */
+/*   Created: 2022/04/05 03:28:36 by mlormois          #+#    #+#             */
+/*   Updated: 2022/04/05 07:22:25 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cmath>
 #include <string>
 #include <iostream>
 
-float map( short x, short y )
+void print_long_bits( unsigned int value, std::string name )
 {
-    float ret, fx, fy;
-    ret = 0;
-
-    for ( int i = 0; i < 16; i++)
-    {
-        fx = (x & 1 << i);
-        fy = (y & 1 << i) << 1;
-        ret += fx + fy;
-    }
-
-    long  convert = *(long*)&ret ;
-    convert  = 0x5f3759df - ( convert >> 32 ); 
-    ret = *(float*)&convert;
-
-    return (ret);
+  	std::cout << name << ": ";
+	for ( int i = 31; i >= 0; i--)
+		std::cout << ((value & (1 << i)) == false ? '0' : '1');
+  	std::cout << std::endl;
 }
 
-int16_t *reverse_map( float n )
+double map( unsigned short x, unsigned short y )
 {
-    int16_t x, y;
+	unsigned int ret, fx, fy;
+	ret = 0;
 
-    x = 0;
-    y = 0;
+	for ( int i = 15; i >= 0; i--)
+	{
+		fx = (x & 1 << i) ? (1 << (i * 2)) : 0;
+		fy = (y & 1 << i) ? 1 << (i * 2 + 1) : 0;
+		ret += fx + fy;
+	}
+	return ( (double)ret / std::pow(2, 32) );
+}
 
-    long convert = *(long*)&n;
+unsigned short *reverse_map( double n )
+{
+	unsigned short x, y;
+	unsigned int convert;
 
-    for ( int i = 0; i < 16; i++)
-    {
-        x += ( convert & 1 << (i * 2) ) >> i;
-        y += ( convert & 1 << (i * 2 + 1) ) >> i;
-    }
+	x = 0;
+	y = 0;
 
-    int16_t *ret = new int16_t[2];
-    ret[0] = x;
-    ret[1] = y;
-    return (ret);
+	convert = (unsigned int)(n * std::pow(2, 32));
+
+	for ( int i = 15; i >= 0; i--)
+	{
+		x += ( convert & 1 << (i * 2) ) >> i;
+		y += ( convert & 1 << (i * 2 + 1) ) >> (i + 1);
+	}
+
+	unsigned short *ret = new unsigned short[2];
+	ret[0] = x;
+	ret[1] = y;
+	return (ret);
+}
+
+void print_bits( short value, std::string name )
+{
+	std::cout << name << ": ";
+	for ( int i = 15; i >= 0; i--)
+		std::cout << ((value & (1 << i)) == false ? '0' : '1');
+	std::cout << std::endl;
 }
 
 int main( void )
 {
-    short x, y;
-    float n;
+	unsigned short x, y;
+	double n = 0;
 
-    x = 900;
-    y = 20;
-    std::cout << "map: " << (n = map( x, y )) << std::endl;
+	x = 1;
+	y = 2;
 
-    int16_t *ret = reverse_map(n);
-    std::cout << "x: " << ret[0] << std::endl << "y: " << ret[1] << std::endl;
+	n = map( x, y );
+	std::cout << std::endl << "n: " << n << std::endl;
+	
+	unsigned short *ret = reverse_map(n);
+	std::cout << "x: " << ret[0] << std::endl << "y: " << ret[1] << std::endl;
 }

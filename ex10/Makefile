@@ -6,11 +6,11 @@
 #    By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 20:06:57 by mlormois          #+#    #+#              #
-#    Updated: 2022/03/31 20:20:21 by mlormois         ###   ########.fr        #
+#    Updated: 2022/04/05 07:24:31 by mlormois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	SetEvaluation
+NAME	=	ZCurve
 
 OBJ_DIR	=   ./objs
 SRC_DIR = $(shell find srcs -type d)
