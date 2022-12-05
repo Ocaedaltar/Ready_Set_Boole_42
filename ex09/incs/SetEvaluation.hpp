@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:43:41 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 11:57:12 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:51:23 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ struct Node
 # define MAJ_TO_DIG 65
 
 Set eval_set( std::string formula, Sets sets);
+
+void is_rpn( std::string const & formula );
 
 #endif

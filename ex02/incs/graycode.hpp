@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:39:29 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 23:47:24 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/01 13:07:04 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <iostream>
 
 void ft_print_bit( unsigned int a );
-// unsigned int ft_gtob( unsigned int a );
-unsigned int graycode( unsigned int a );
+unsigned int gray_code( unsigned int a );
 
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:51:08 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 17:04:13 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/01 12:53:55 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void test( unsigned int a , unsigned int b)
 {
-	std::cout << a << " + " << b << " = " << adder(a, b) << std::endl;
+	std::cout << AFFNUM(a) << " + " << AFFNUM(b) << " = " << adder(a, b) << std::endl;
 }
 
 int main( void )
@@ -22,6 +22,6 @@ int main( void )
 	test(20, 900);
 	test(0, 5);
 	test(99999, 1);
-	test(163, 6);
+	test(0, 0);
 	return 0;
 }

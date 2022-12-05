@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:29:26 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/15 02:11:07 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:35:39 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ std::string conjunctive_normal_form( std::string const & formula )
 	is_rpn( formula );
 	ft::Ast tree( formula );
 	tree.conjonctive_form();
+	// tree.print();
 	return tree.to_string();
 }
 

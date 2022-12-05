@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 00:06:34 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 14:29:02 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:52:37 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ Set makeOr( Node a, Node b )
 
 Set eval_set( std::string formula, Sets sets)
 {
+	is_rpn( formula );
 	std::stack<Node> res;
 	std::string fnc = conjunctive_normal_form( formula );
 	std::cout << fnc << std::endl;

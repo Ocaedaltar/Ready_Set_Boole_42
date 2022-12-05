@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:30:17 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 20:56:37 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/05 17:35:22 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,9 +186,9 @@ namespace ft
 	void    Ast::print(void)
 	{
 		std::stringstream    buffer;
-
 		if (this->_root != this->NIL)
 		{
+			std::cout << std::endl;
 			this->_print(this->_root, buffer, true, "");
 			std::cout << buffer.str();
 		}
