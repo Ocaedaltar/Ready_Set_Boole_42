@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:28:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/08 20:24:39 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 05:49:02 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ namespace ft
 		//////////////////////////
 
 	public:
-		void	print(void);
+		void	print(const std::string &formula);
 
 	private:
 		void	_print(nodePTR node, std::stringstream &buffer, bool isTail, std::string prefix);

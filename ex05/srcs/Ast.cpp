@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 14:24:06 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 06:09:17 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,13 +319,13 @@ namespace ft
 		return dst;
 	}
 
-	// Affichage d'arbres syntaxique:
-	void    Ast::print(void)
+	void    Ast::print( const std::string &formula )
 	{
 		std::stringstream    buffer;
 
 		if (this->_root != this->NIL)
 		{
+			std::cout << formula << ':' << std::endl;
 			this->_print(this->_root, buffer, true, "");
 			std::cout << buffer.str();
 		}

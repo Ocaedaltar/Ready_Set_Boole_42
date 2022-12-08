@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 05:28:40 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/02 15:54:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 05:03:10 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <iostream>
 # include "Ast_utils.hpp"
 # include <stack>
+
+# define ERR_NARG(x) std::cerr << "Error: too " << (x < 2 ? "less" : "much" ) << " number of arguments" << std::endl
+# define ERR_ARG std::cerr << "Error: bad arguments" << std::endl
+# define ERR_RAN std::cerr << "Error: argument out of range" << std::endl
+
+# define M_BOOL "01&|^>=!"
+# define M_VARS "ABCDEFGHIJKLMNOPQRSTUVWXYZ&|^>=!"
+
+void is_rpn( std::string const & formula );
 
 namespace ft
 {
@@ -54,9 +63,7 @@ namespace ft
 		iterator begin( void );
 		iterator end( void );
 
-		// Return le resultat de la formule si possible.
 		bool result( void );
-		// Affiche le resultat simple ou table de verite en fonction des variables.
 		void printTable( void );
 
 	private:

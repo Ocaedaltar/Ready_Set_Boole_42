@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:27:56 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/05 17:19:19 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 05:32:19 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ bool little_check_letter( std::string const & str ) {
 			number++;
 		else if ( str[i] == '&' || str[i] == '|' || str[i] == '=' || str[i] == '|' || str[i] == '^' || str[i] == '>')
 			opp++;
-		else if ( str[i] != '!' ) // PAS UN CHAR VALIDE
+		else if ( str[i] != '!' )
 			return true;
 	}
 	if (number - opp != 1)
@@ -129,16 +129,15 @@ void print_truth_table( std::string const & str)
 		makeTest( str, map, i);
 }
 
-int main( void )
+int main(int ac, char **av)
 {
-	// print_truth_table( "A!!B|!" );
-	print_truth_table( "AB&C|DA&A|&" );
-
-	print_truth_table( "&|" );
-	print_truth_table( "01&" );
-	print_truth_table( "AB" );
-	print_truth_table( "ABAB&&" );
-	print_truth_table( "A&&&&&" );
-	print_truth_table( "AB!!!!!" );
-	print_truth_table( "" );
+	for (int i = 1; i < ac; i++) {
+		try {
+			print_truth_table(av[i]);
+		} catch (std::invalid_argument const &e) {
+			std::cerr << "Error: " << av[i] << ' ' << e.what() << std::endl;
+		}
+		std::cout << std::endl;
+	}
+	return 0;
 }

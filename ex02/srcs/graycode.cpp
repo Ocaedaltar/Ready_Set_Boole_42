@@ -6,19 +6,28 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 18:41:06 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/01 13:06:50 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 04:44:42 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graycode.hpp"
 
-unsigned int gray_code( unsigned int a )
-{
+// FORMULA:
+// g(i) = b(i) ^ b(i-1)
+
+unsigned int gray_code( unsigned int a ) {
 	return (a ^ (a >> 1));
 }
 
-void ft_print_bit( unsigned int a )
-{
-	for ( int i = 7; i >= 0; i--)
-		std::cout << ((a & (1 << i)) ? 1 : 0) << (i % 4 == 0 ? " " : "");
-}
+/* EXEMPLE:
+
+0 0          0  .0    0  00     0  .00     0  000
+1 1          1  .1    1  01     1  .01     1  001
+     miroir→------              2  .11     2  011
+             2  .1    2  11     3  .10     3  010
+             3  .0    3  10     ------- 
+                                4  .10     4  110
+                                5  .11     5  111
+                                6  .01     6  101
+                                7  .00     7  100
+*/ 

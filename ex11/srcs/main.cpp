@@ -6,20 +6,25 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 03:28:36 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/05 17:59:17 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 07:29:21 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmath>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
-void print_long_bits( unsigned int value, std::string name )
-{
-  	std::cout << name << ": ";
-	for ( int i = 31; i >= 0; i--)
-		std::cout << ((value & (1 << i)) == false ? '0' : '1');
-  	std::cout << std::endl;
+long adder( long a, long b) {
+	return (a ? adder((a & b) << 1, a ^ b) : b);
+}
+
+long multiplier( long a, long b ) {
+	return ( b > 1 ? adder(a, multiplier( a, b - 1 )) : b == 1 ? a : 0);
+}
+
+double power( unsigned int elem, unsigned int exp) {
+	return (exp > 0 ? multiplier(power(elem, exp - 1), elem) : 1);
 }
 
 double map( unsigned short x, unsigned short y )
@@ -33,7 +38,7 @@ double map( unsigned short x, unsigned short y )
 		fy = (y & 1 << i) ? 1 << (i * 2 + 1) : 0;
 		ret += fx + fy;
 	}
-	return ( (double)ret / std::pow(2, 32) );
+	return ( (double)ret / power(2, 32) );
 }
 
 unsigned short *reverse_map( double n )
@@ -44,7 +49,7 @@ unsigned short *reverse_map( double n )
 	x = 0;
 	y = 0;
 
-	convert = (unsigned int)(n * std::pow(2, 32));
+	convert = (unsigned int)(n * power(2, 32));
 
 	for ( int i = 15; i >= 0; i--)
 	{
@@ -58,25 +63,24 @@ unsigned short *reverse_map( double n )
 	return (ret);
 }
 
-void print_bits( short value, std::string name )
-{
-	std::cout << name << ": ";
-	for ( int i = 15; i >= 0; i--)
-		std::cout << ((value & (1 << i)) == false ? '0' : '1');
-	std::cout << std::endl;
+static void ft_visualizer( double value ) {
+	if (value < 0 || value > 1 )
+		throw std::out_of_range("");
+	unsigned short *ret = reverse_map(value);
+	std::cout << "ex11: rx: " << std::setw(5) << ret[0] << std::endl << "      ry: " << std::setw(5) << ret[1] << std::endl;
 }
 
-int main( void )
+int main(int ac, char **av)
 {
-	unsigned short x, y;
-	double n = 0;
-
-	x = 1;
-	y = 2;
-
-	n = map( x, y );
-	std::cout << std::endl << "n: " << n << std::endl;
-	
-	unsigned short *ret = reverse_map(n);
-	std::cout << "x: " << ret[0] << std::endl << "y: " << ret[1] << std::endl;
+	if (ac != 2)
+		return (std::cout << "Error: Two arguments needed\n", 1);
+	try {
+		ft_visualizer(std::stod(av[1]));
+	} catch (std::invalid_argument const &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	} catch (std::out_of_range const &e) {
+		return (std::cerr << "Error: arguments out of range. it should be in [0,1]" << std::endl, 1);
+	}
+	std::cout << std::endl;
+	return 0;
 }

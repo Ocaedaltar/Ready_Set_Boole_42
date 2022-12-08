@@ -6,13 +6,12 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 17:10:00 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 03:10:23 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 03:14:32 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multiplier.hpp"
 
-// RECURSIVE
 int adder( int a, int b) {
 	return (a ? adder((a & b) << 1, a ^ b) : b);
 }
