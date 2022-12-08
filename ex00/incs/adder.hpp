@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:46:12 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/01 12:49:34 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 02:42:55 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <iostream>
 # include <iomanip>
 
-# define AFFNUM(x) std::setw(5) << x
+# define ERR_NARG(x) std::cerr << "Error: too " << (x < 2 ? "less" : "much" ) << " number of arguments" << std::endl
+# define ERR_ARG std::cerr << "Error: bad arguments" << std::endl
+# define ERR_RAN std::cerr << "Error: argument out of range" << std::endl
 
-unsigned int adder( unsigned int a, unsigned int b);
+int adder( int a, int b);
 
 #endif

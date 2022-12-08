@@ -6,32 +6,29 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:44:25 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 17:41:04 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 02:57:29 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "adder.hpp"
 
 // RECURSIVE
-// unsigned int adder( unsigned int a, unsigned int b)
-// {
-// 	if (!a)
-// 		return b;
-// 	return adder((a & b) << 1, a ^ b);
-// }
+int adder( int a, int b) {
+	return (a ? adder((a & b) << 1, a ^ b) : b);
+}
 
 // ITERATIVE
-unsigned int adder( unsigned int a, unsigned int b)
-{
-	unsigned int tmp;
-	while (a && b)
-	{
-		tmp = (a & b) << 1;
-		b = a ^ b;
-		a = tmp;
-	}
-	return b;
-}
+// int adder( int a, int b)
+// {
+// 	int tmp;
+// 	while (a && b)
+// 	{
+// 		tmp = (a & b) << 1;
+// 		b = a ^ b;
+// 		a = tmp;
+// 	}
+// 	return b;
+// }
 
 // exemple pour 3 + 1 = 4
 

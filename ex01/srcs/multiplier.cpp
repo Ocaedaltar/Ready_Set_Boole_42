@@ -6,25 +6,17 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 17:10:00 by mlormois          #+#    #+#             */
-/*   Updated: 2022/02/25 18:00:20 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/08 03:10:23 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multiplier.hpp"
 
 // RECURSIVE
-unsigned int adder( unsigned int a, unsigned int b)
-{
-	if (!a)
-		return b;
-	return adder((a & b) << 1, a ^ b);
+int adder( int a, int b) {
+	return (a ? adder((a & b) << 1, a ^ b) : b);
 }
 
-unsigned int multiplier( unsigned int a, unsigned int b )
-{
-	if (b == 1)
-		return a;
-	else if (b > 1)
-		return ( adder(a, multiplier( a, b - 1 )) );
-	return 0;
+int multiplier( int a, int b ) {
+	return ( b > 1 ? adder(a, multiplier( a, b - 1 )) : b == 1 ? a : 0);
 }
