@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 14:35:10 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 06:10:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/10 08:52:51 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int main(int ac, char **av)
 			ft_visualizer(av[i]);
 		} catch (std::invalid_argument const &e) {
 			std::cerr << "Error: " << av[i] << ' ' << e.what() << std::endl;
+			return 1;
 		}
 		std::cout << std::endl;
 	}

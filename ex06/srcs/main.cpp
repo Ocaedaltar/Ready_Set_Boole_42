@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:29:26 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/05 17:35:39 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/10 09:19:16 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,28 @@
 
 std::string conjunctive_normal_form( std::string const & formula )
 {
-	is_rpn( formula );
 	ft::Ast tree( formula );
 	tree.conjonctive_form();
 	// tree.print();
 	return tree.to_string();
 }
 
-int main( int ac, char **av )
+static void ft_visualizer( std::string const & str ) {
+	is_rpn( str );
+	std::string nnf = conjunctive_normal_form( str );
+	std::cout << str << "  =>  " << nnf << std::endl;
+}
+
+int main(int ac, char **av)
 {
-	if ( ac != 2)
-		return 1;
-
-	try
-	{
-
-		std::cout << "AB&!" << ": " << conjunctive_normal_form( "AB&!" ) << std::endl;
-		std::cout << "AB|!" << ": " << conjunctive_normal_form( "AB|!" ) << std::endl;
-		std::cout << "AB|C&" << ": " << conjunctive_normal_form( "AB|C&" ) << std::endl;
-		std::cout << "AB|C|D|" << ": " << conjunctive_normal_form( "AB|C|D|" ) << std::endl;
-		std::cout << "AB&C&D&" << ": " << conjunctive_normal_form( "AB&C&D&" ) << std::endl;
-		std::cout << "AB&!C!|" << ": " << conjunctive_normal_form( "AB&!C!|" ) << std::endl;
-		std::cout << "AB|!C!&" << ": " << conjunctive_normal_form( "AB|!C!&" ) << std::endl;
-		std::cout << "complex:" << std::endl << "AB&CD&&AB|CD||&" << ": " << conjunctive_normal_form( "AB&CD&&AB|CD||&" ) << std::endl;
-		std::cout << "your:" << std::endl << conjunctive_normal_form( av[1] ) << std::endl;
+	for (int i = 1; i < ac; i++) {
+		try {
+			ft_visualizer(av[i]);
+		} catch (std::invalid_argument const &e) {
+			std::cerr << "Error: " << av[i] << ' ' << e.what() << std::endl;
+			return 1;
+		}
+		std::cout << std::endl;
 	}
-	catch(const std::invalid_argument& ia)
-	{
-		std::cerr << "Invalide Argument: \"" << av[1] << "\" " << ia.what() << std::endl;
-		return 1;
-	}
-	return (0);
+	return 0;
 }

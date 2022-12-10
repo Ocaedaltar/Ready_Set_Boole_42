@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 16:54:19 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/16 19:19:10 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:50:12 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,17 @@ void print_powerset( std::vector<int> set, std::vector<std::vector<int>> powset 
 	std::cout << "}" << std::endl;
 }
 
-int main( void )
+int main( int ac, char **av )
 {
 	std::vector<int> alpha;
-	for (int i = 1; i < 5; i++)
-		alpha.push_back( i );
-	print_powerset( alpha, powerset(alpha) );
+
+	try {
+		for (int i = 1; i < ac; i++)
+			alpha.push_back( std::stoi(av[i]) );
+		print_powerset( alpha, powerset(alpha) );
+	} catch (std::invalid_argument const &e) {
+			std::cerr << "Error: " << e.what() << std::endl;
+			return 1;
+	}
+	return 0;
 }

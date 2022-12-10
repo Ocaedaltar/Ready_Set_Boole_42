@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 03:28:36 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 07:39:17 by mlormois         ###   ########.fr       */
+/*   Updated: 2022/12/10 08:50:36 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int main(int ac, char **av)
 		ft_visualizer(std::stoi(av[1]), std::stoi(av[2]));
 	} catch (std::invalid_argument const &e) {
 		std::cerr << "Error: " << e.what() << std::endl;
+		return 1;
 	} catch (std::out_of_range const &e) {
 		return (std::cerr << "Error: arguments out of range" << std::endl, 1);
 	}
