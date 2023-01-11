@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 06:09:17 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:30:34 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ namespace ft
 		for ( iterator it = begin(); it != end(); it++ )
 		{
 			if (it->type == BOOL)
-				res.push( it->value == '0' ? false : true );
+				res.push( ( it->value == '0' ? false : true ) * !(it->neg) );
 			else
 			{
 				b = res.top(); res.pop();

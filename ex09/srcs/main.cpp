@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:43:14 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/10 11:15:08 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:50:32 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,31 @@ void sets_print( Sets data )
 	}
 }
 
-Sets make_sets( int number, int range, int max )
+int countVar( std::string formula ) {
+	int count = 0;
+	for (int i = 0; formula[i] != '\0'; i++) {
+		if ( formula[i] >= 'A' && formula[i] <= 'Z') {
+			if (i == 0)
+				count++;
+			for (int j = i - 1; j >= 0; j-- ) {
+				if (formula[i] == formula[j])
+					break ;
+				if (j == 0)
+					count++;
+			}
+		}
+	}
+	std::cout << "N VAR: " << count << std::endl;
+	return count;
+}
+
+Sets make_sets( char *formula, int range, int max )
 {
 	Sets tab_set;
+	int nvar = countVar(formula);
 	if ( range > max )
 		return tab_set;
-	for ( int i = 0; i < number; i++)
+	for ( int i = 0; i < nvar; i++)
 	{
 		Set elem;
 		for ( int i = 0; i < range; i++)
@@ -63,20 +82,15 @@ int main( int ac, char **av )
 	if (ac != 2)
 		return 1;
 
-	Sets tab_set_empty = make_sets( 2 , 0 , 10);
-	Sets tab_set = make_sets( 2 , 4 , 10);
+	Sets tab_set = make_sets( av[1], 4 , 10);
 
 	if ( tab_set.size() == 0 )
 		return (std::cout << "Error: make_sets invalid\n", 1);
 	sets_print( tab_set );
 	std::cout << std::endl;
-	// sets_print( tab_set_empty );
-	// std::cout << std::endl;
 
 	try {
 		set_print( eval_set( av[1], tab_set) );
-		// std::cout << std::endl;
-		// set_print( eval_set( av[1], tab_set_empty) );
 	} catch(const std::invalid_argument& ia)
 	{
 		std::cerr << "Invalide Argument: expression " << ia.what() << std::endl;

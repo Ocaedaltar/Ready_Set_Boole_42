@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 22:22:20 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/05 17:55:41 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:33:24 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static bool check_syntax( std::string const & formula)
 	std::stack< bool > save;
 	std::string opp = "&|^>=";
 
-	// std::cout << "size : " << save.size() << std::endl;
 	for ( size_t i = 0; formula[i]; i++ )
 	{
 		if ( opp.find(formula[i]) != std::string::npos )
@@ -34,7 +33,6 @@ static bool check_syntax( std::string const & formula)
 		else if ( formula[i] != '!' )
 			save.push( true );
 	}
-	// std::cout << "size : " << save.size() << std::endl;
 	return ((save.size() == 1) ? false : true );
 }
 

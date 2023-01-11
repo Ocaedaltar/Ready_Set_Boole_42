@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/01 13:39:09 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:25:49 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ namespace ft
 			return 0;
 		else if ( val >= 'A' && val <= 'Z' )
 		{
-			// std::map< char, bool>::iterator it = _vars.find( val );
-			// if (it == _vars.end())
 			_vars.insert( std::pair<char, bool>( val, true));
 			return 0;
 		}
@@ -71,9 +69,7 @@ namespace ft
 		nodePTR tmp_b;
 		for ( size_t i = 0; i < formula.size(); i++)
 		{
-			value = formula[i];
-			// std::cout << formula[i] << std::endl;
-
+			value = formula[i]; 
 			if ( !_isVariable( value ) )
 			{
 				save.push( _node_create( value, 0) );
@@ -91,8 +87,9 @@ namespace ft
 				tmp_b->parent = elem;
 				save.push( elem );
 			}
-			else if ( value == '!' )
+			else if ( value == '!' ) {
 				save.top()->setNeg();
+			}
 			else
 				break;
 		}
@@ -144,25 +141,19 @@ namespace ft
 
 	bool Ast::result( void )
 	{
-		// std::cout << " PRINT RES: " << std::endl;
-		// for ( iterator it = begin(); it != end(); it++)
-		// {
-		// 	std::cout << it->value << " ";
-		// }
-		// std::cout << std::endl;
 
 		bool a;
 		bool b;
-
 		std::stack<bool> res;
 
 		for ( iterator it = begin(); it != end(); it++ )
 		{
-			if (it->type == BOOL)
-				res.push( it->value == '0' ? false : true );
+			if (it->type == BOOL) {
+				res.push( ( it->value == '0' ? false : true ) * !(it->neg) );
+			}
 			else
 			{
-				b = res.top(); res.pop();
+				b = res.top() ; res.pop();
 				a = res.top(); res.pop();
 				switch (it->type)
 				{

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:27:56 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 05:32:19 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:29:03 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void makeTest( std::string const & formula, std::map<char, bool> map, int values
 }
 
 bool little_check_letter( std::string const & str ) {
-	if (str.size() < 3)
-		return true;
 	if (str[0] < 'A' || str[0] > 'Z')
 		return true;
 	int number = 0, opp = 0;

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:52:14 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 13:14:08 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 15:33:45 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ Node &Node::operator=( Node const & other )
 
 void Node::setNeg( void )
 {
-	neg = ( neg ? false : true );
+	neg = !neg;
 }

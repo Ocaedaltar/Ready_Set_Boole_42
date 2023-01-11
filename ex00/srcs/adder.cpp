@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 14:44:25 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/12 15:25:09 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:55:58 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int adder( int a, int b)
 {
 	int tmp;
-	while (a && b)
+	while (a)
 	{
 		tmp = (a & b) << 1;
 		b = a ^ b;

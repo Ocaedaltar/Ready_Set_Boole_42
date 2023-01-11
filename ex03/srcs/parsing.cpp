@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 04:43:07 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/08 05:08:56 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:57:47 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,18 @@ static bool check_syntax( std::string const & formula)
 {
 	std::stack< bool > save;
 	std::string opp = "&|^>=";
-	bool flag = false;
 
 	for ( char letter : formula ) {
 		if ( opp.find(letter) != std::string::npos ) {
 			if (save.size() == 0) {
 				return true;
 			}
-			flag = true;
 			save.pop();
 		} else if ( letter != '!' ) {
 			save.push( true );
 		}
 	}
-	return ((save.size() == 1 && flag) ? false : true );
+	return ((save.size() == 1) ? false : true );
 }
 
 void is_rpn( std::string const & formula )
