@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:30:17 by mlormois          #+#    #+#             */
-/*   Updated: 2023/01/11 15:30:29 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:16:28 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ namespace ft
 		for ( iterator it = begin(); it != end(); it++ )
 		{
 			if (it->type == BOOL)
-				res.push( ( it->value == '0' ? false : true ) * !(it->neg) );
+				res.push( (!it->neg ? ( it->value == '0' ? false : true )  : ( it->value == '0' ? true : false )) );
 			else
 			{
 				b = res.top(); res.pop();
@@ -157,6 +157,7 @@ namespace ft
 	nodePTR Ast::_copieNodes( nodePTR node )
 	{
 		nodePTR elem = _node_create(node->value, node->type);
+		elem->neg = node->neg;
 		if ( node->left != NIL )
 		{
 			elem->left = _copieNodes( node->left );
@@ -183,12 +184,13 @@ namespace ft
 	}
 
 	// Affichage d'arbres syntaxique:
-	void    Ast::print(void)
+	void    Ast::print( const std::string &formula )
 	{
 		std::stringstream    buffer;
 
 		if (this->_root != this->NIL)
 		{
+			std::cout << formula << ':' << std::endl;
 			this->_print(this->_root, buffer, true, "");
 			std::cout << buffer.str();
 		}

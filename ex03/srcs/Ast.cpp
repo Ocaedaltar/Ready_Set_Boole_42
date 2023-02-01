@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 23:53:48 by mlormois          #+#    #+#             */
-/*   Updated: 2023/01/11 15:25:49 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:08:45 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ namespace ft
 		for ( iterator it = begin(); it != end(); it++ )
 		{
 			if (it->type == BOOL) {
-				res.push( ( it->value == '0' ? false : true ) * !(it->neg) );
+				res.push( (!it->neg ? ( it->value == '0' ? false : true )  : ( it->value == '0' ? true : false )) );
 			}
 			else
 			{
@@ -158,19 +158,19 @@ namespace ft
 				switch (it->type)
 				{
 				case AND:
-					res.push( (a == true && b == true) ? true : false);
+					res.push( (a == true && b == true) ? (it->neg ? false : true) : (it->neg ? true : false));
 					break;
 				case OR:
-					res.push( (a == true || b == true ) ? true : false);
+					res.push( (a == true || b == true ) ? (it->neg ? false : true) : (it->neg ? true : false));
 					break;
 				case XOR:
-					res.push( ( a != b ) ? true : false);
+					res.push( ( a != b ) ? (it->neg ? false : true) : (it->neg ? true : false));
 					break;
 				case MC:
-					res.push( ( a == true && b == false ) ? false : true);
+					res.push( ( a == true && b == false ) ? (it->neg ? true : false) : (it->neg ? false : true));
 					break;
 				case EGAL:
-					res.push( (a == b ) ? true : false);
+					res.push( (a == b ) ? (it->neg ? false : true) : (it->neg ? true : false));
 					break;
 				default:
 					break;

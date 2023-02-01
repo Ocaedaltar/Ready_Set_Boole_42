@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 17:10:00 by mlormois          #+#    #+#             */
-/*   Updated: 2023/01/11 14:56:38 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:19:15 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int adder( int a, int b)
 }
 
 int multiplier( int a, int b ) {
-    int max = ~0U >> 1, res = 0;
+    int res = 0;
 
     for (int i = 31; i >= 0; i--)
         if ( a & 1 << i )

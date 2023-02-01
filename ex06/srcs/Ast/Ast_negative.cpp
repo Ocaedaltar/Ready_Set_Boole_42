@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:34:35 by mlormois          #+#    #+#             */
-/*   Updated: 2022/03/30 14:23:46 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:46:55 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ namespace ft
 		tmp_left->parent = node;
 		node->right = tmp_right;
 		tmp_right->parent = node;
+
+		// if ( node->neg )
+		// 	_deMorganLaw( node );
+
 	}
 
 	void Ast::rewrite_xor( nodePTR node )

@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 00:06:34 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/05 17:52:37 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:25:07 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,22 @@ Set makeOr( Node a, Node b )
 	return (a.neg ? b.value : a.value );
 }
 
+int search_origin_set( char var,  std::string formula ) {
+	int ret = 0;
+	char tmp = '#';
+	for ( char letter : formula ) {
+		if ( letter == var )
+			break;
+		if ( letter >= 'A' && letter <= 'Z' ) {
+			if (letter != tmp) {
+				ret++;
+				tmp = letter;
+			}
+		}
+	}
+	return ret;
+}
+
 Set eval_set( std::string formula, Sets sets)
 {
 	is_rpn( formula );
@@ -112,7 +128,7 @@ Set eval_set( std::string formula, Sets sets)
 	for (int i = 0; fnc[i]; i++)
 	{
 		if ( fnc[i] >= 'A' && fnc[i] <= 'Z' )
-			res.push( Node(sets[ fnc[i] - MAJ_TO_DIG ], false));
+			res.push( Node(sets[ search_origin_set(fnc[i], formula) ], false));
 		else if ( fnc[i] == '!')
 			res.top().setNeg();
 		else
@@ -122,5 +138,5 @@ Set eval_set( std::string formula, Sets sets)
 			res.push( Node( (fnc[i] == '&' ? makeAnd( a , b ) : makeOr( a , b ) ), 0) );
 		}
 	}
-	return ( res.top().value);
+	return ( res.top().neg == true ? Set() : res.top().value );
 }

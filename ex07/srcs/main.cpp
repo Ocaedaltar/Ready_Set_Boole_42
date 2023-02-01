@@ -6,7 +6,7 @@
 /*   By: mlormois <mlormois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 20:29:26 by mlormois          #+#    #+#             */
-/*   Updated: 2022/12/10 09:24:34 by mlormois         ###   ########.fr       */
+/*   Updated: 2023/01/27 13:55:47 by mlormois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool sat( std::string const & formula )
 static void ft_visualizer( std::string const & str ) {
 	is_rpn( str );
 	bool nnf = sat( str );
-	std::cout << str << "  =>  " << nnf << std::endl;
+	std::cout << str << "  =>  " << std::boolalpha << nnf << std::endl;
 }
 
 int main(int ac, char **av)
